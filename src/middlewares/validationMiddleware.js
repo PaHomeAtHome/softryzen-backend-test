@@ -1,25 +1,21 @@
-const Joi = require("joi");
+const Joi = require("joi").extend(require("@joi/date"));
 const { ValidationError } = require("../helpers/errors");
 
 module.exports = {
   addMovieValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string()
-        .min(3)
-        .max(100)
-        .regex(/^\s*\w+(?:[^\w,]+\w+)*[^,\w]*$/)
-        .required(),
-      email: Joi.string().email().required(),
-      phone: Joi.string()
-        .min(3)
-        .pattern(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/)
-        .required(),
-      favorite: Joi.boolean(),
+      title: Joi.string().min(1).max(100).required(),
+      director: Joi.string().min(1).max(100).required(),
+      releaseDate: Joi.date().format("DD-MM-YYYY").max("now").required(),
     });
 
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      next(new ValidationError(JSON.stringify(validationResult.error.details)));
+      next(
+        new ValidationError(
+          validationResult.error.details[0].message.replace(/"/g, "")
+        )
+      );
     }
 
     next();

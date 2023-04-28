@@ -1,11 +1,11 @@
 const { addMovie } = require("../../services/moviesService");
 
-const addMoviesController = async (req, res) => {
+const addMovieController = async (req, res) => {
   const { _id: userId } = req.user;
-  const { name, email, phone, favorite } = req.body;
+  const { title, director, releaseDate } = req.body;
 
-  await addMovie({ name, email, phone, favorite }, userId);
-  res.status(201).json({ message: name, email, phone, favorite });
+  await addMovie({ title, director, releaseDate }, userId);
+  res.status(201).json({ message: title, director, releaseDate });
 };
 
-module.exports = addMoviesController;
+module.exports = addMovieController;

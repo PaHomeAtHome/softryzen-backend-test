@@ -9,25 +9,25 @@ const {
 const { authMiddleware } = require("../../middlewares/authMiddleware");
 
 const {
-  addMoviesController,
-  changeMoviesController,
-  deleteMoviesController,
-  getMoviesByIdController,
+  addMovieController,
+  changeMovieController,
+  deleteMovieController,
+  getMovieByIdController,
   getMoviesController,
-} = require("../../controllers/moviesController");
+} = require("../../controllers/moviesController/");
 
 const router = express.Router();
 
 router.use(authMiddleware);
 
 router.get("/", asyncWrapper(getMoviesController));
-router.get("/:movieId", asyncWrapper(getMoviesByIdController));
-router.post("/", addMovieValidation, asyncWrapper(addMoviesController));
+router.get("/:movieId", asyncWrapper(getMovieByIdController));
+router.post("/", addMovieValidation, asyncWrapper(addMovieController));
 router.put(
   "/:movieId",
   addMovieValidation,
-  asyncWrapper(changeMoviesController)
+  asyncWrapper(changeMovieController)
 );
-router.delete("/:movieId", asyncWrapper(deleteMoviesController));
+router.delete("/:movieId", asyncWrapper(deleteMovieController));
 
 module.exports = { moviesRouter: router };

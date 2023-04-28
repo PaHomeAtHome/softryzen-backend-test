@@ -1,24 +1,23 @@
 const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
-    required: [true, "Set name for movie"],
+    required: [true, "Set title for movie"],
   },
-  email: {
+  director: {
     type: String,
+    required: [true, "Set director for movie"],
   },
-  phone: {
-    type: String,
-  },
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
+  releaseDate: String,
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
   },
+});
+
+movieSchema.post("save", function (error, doc, next) {
+  next(new ValidationError(error));
 });
 
 const Movie = mongoose.model("Movie", movieSchema);
