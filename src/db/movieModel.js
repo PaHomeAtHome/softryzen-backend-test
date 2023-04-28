@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const contactSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Set name for contact"],
+    required: [true, "Set name for movie"],
   },
   email: {
     type: String,
@@ -21,6 +21,6 @@ const contactSchema = new mongoose.Schema({
   },
 });
 
-const Contact = mongoose.model("Contact", contactSchema);
+const Movie = mongoose.model("Movie", movieSchema);
 
-module.exports = { Contact };
+module.exports = { Movie };
