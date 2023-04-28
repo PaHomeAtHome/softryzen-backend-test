@@ -1,39 +1,39 @@
-class GoIt26NodeError extends Error {
+class NodeError extends Error {
   constructor(message) {
     super(message);
     this.status = 400;
   }
 }
 
-class ValidationError extends GoIt26NodeError {
+class ValidationError extends NodeError {
   constructor(message) {
     super(message);
     this.status = 400;
   }
 }
 
-class WrongParametersError extends GoIt26NodeError {
+class WrongParametersError extends NodeError {
   constructor(message) {
     super(message);
     this.status = 400;
   }
 }
 
-class NotAuthorizedError extends GoIt26NodeError {
+class NotAuthorizedError extends NodeError {
   constructor(message) {
     super(message);
     this.status = 401;
   }
 }
 
-class NotFoundError extends GoIt26NodeError {
+class NotFoundError extends NodeError {
   constructor(message) {
     super(message);
     this.status = 404;
   }
 }
 
-class ConflictError extends GoIt26NodeError {
+class ConflictError extends NodeError {
   constructor(message) {
     super(message);
     this.status = 409;
@@ -41,7 +41,7 @@ class ConflictError extends GoIt26NodeError {
 }
 
 module.exports = {
-  GoIt26NodeError,
+  NodeError,
   ValidationError,
   WrongParametersError,
   NotAuthorizedError,

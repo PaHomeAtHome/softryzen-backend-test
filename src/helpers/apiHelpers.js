@@ -1,4 +1,4 @@
-const { GoIt26NodeError } = require("./errors");
+const { NodeError } = require("./errors");
 
 const asyncWrapper = (controller) => {
   return (req, res, next) => {
@@ -7,7 +7,7 @@ const asyncWrapper = (controller) => {
 };
 
 const errorHandler = (error, req, res, next) => {
-  if (error instanceof GoIt26NodeError) {
+  if (error instanceof NodeError) {
     return res.status(error.status).json({ message: error.message });
   }
   res.status(500).json({ message: error.message });

@@ -25,7 +25,7 @@ const authMiddleware = async (req, res, next) => {
       next(new NotAuthorizedError("Not authorized"));
     }
 
-    if (userFound.token && userFound.token !== token) {
+    if (userFound.token !== token) {
       next(new NotAuthorizedError("Not authorized"));
     }
 
