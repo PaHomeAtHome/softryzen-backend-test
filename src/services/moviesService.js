@@ -10,11 +10,11 @@ const getMovieById = async (movieId, userId) => {
   try {
     const movie = await Movie.findOne({ _id: movieId, owner: userId });
     if (!movie) {
-      throw new WrongParametersError(`no posts with id ${movieId} found`);
+      throw new WrongParametersError(`no movies with id ${movieId} found`);
     }
     return movie;
-  } catch {
-    throw new WrongParametersError(`wrong ID`);
+  } catch (error) {
+    throw new WrongParametersError(error.message);
   }
 };
 
@@ -36,7 +36,8 @@ const changeMovieById = async (
 };
 
 const deleteMovieById = async (movieId, userId) => {
-  await Movie.findOneAndRemove({ _id: movieId, owner: userId });
+  const result = await Movie.findOneAndRemove({ _id: movieId, owner: userId });
+  return result;
 };
 
 module.exports = {
